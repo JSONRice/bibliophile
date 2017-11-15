@@ -1,15 +1,21 @@
 var path = require('path');
-var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
+var webpack = require('webpack');
+
+var NgAnnotatePlugin = require('ng-annotate-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const PATHS = {
     source: path.join(__dirname, 'app'),
+    vendor: ['angular', '@uirouter/angularjs'],
     build: path.join(__dirname, '../../../target/classes/static')
 };
 
 module.exports = {
-    entry: [
-        PATHS.source
-    ],
+    entry: {
+        app: PATHS.source,
+        vendor: PATHS.vendor
+    },
     output: {
         path: PATHS.build,
         publicPath: '',
@@ -22,13 +28,25 @@ module.exports = {
             exclude: /node_modules/
         },{
             test: /\.css$/,
-            loader: 'css-loader'
+            use: ExtractTextPlugin.extract({
+                use: 'css-loader',
+                fallback: 'style-loader'
+            })
+        },{
+            test: /\.scss$/,
+            use: ExtractTextPlugin.extract({
+                use: ['css-loader', 'sass-loader'],
+                fallback: 'style-loader'
+            })
         },{
             test: /\.html$/,
             loader: 'raw-loader'
         }]
     },
     plugins: [
-        new ngAnnotatePlugin({add: true})
+        new ExtractTextPlugin({filename: 'bundle.css'}),
+        new NgAnnotatePlugin({add: true}),
+        new HtmlWebpackPlugin({template: 'index.html'}),
+        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'})
     ]
 };
