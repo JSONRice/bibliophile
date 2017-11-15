@@ -1,0 +1,40 @@
+# DEFAULT PROFILE
+spring:
+  profiles:
+    active:
+    - dev
+    - h2
+server:
+  port: 8989
+  address: 0.0.0.0
+
+---
+
+# DEVELOPMENT PROFILE
+spring:
+  profiles: dev
+  jpa:
+    properties:
+      hibernate.show_sql: true
+      hibernate.use_sql_comments: true
+      hibernate.format_sql: true
+      hibernate.type: trace
+    hibernate:
+      ddl-auto: update
+
+---
+
+# EMBEDDED H2 DATABASE PROFILE
+spring:
+  profiles: h2
+
+---
+
+# EXTERNAL MYSQL DATABASE PROFILE
+spring:
+  profiles: mysql
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bibliophile?useSSL=false
+    username: app
+    password: app
