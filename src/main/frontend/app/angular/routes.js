@@ -1,6 +1,7 @@
 import Home from './home';
 
 export default function routerConfig($stateProvider, $urlRouterProvider) {
+    'ngInject';
 
     $urlRouterProvider.otherwise('/home');
 
