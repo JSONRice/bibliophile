@@ -7,7 +7,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const PATHS = {
     source: path.join(__dirname, 'app'),
-    vendor: ['angular', '@uirouter/angularjs'],
+    vendor: ['angular', 'angular-ui-router'],
     build: path.join(__dirname, '../../../target/classes/static')
 };
 

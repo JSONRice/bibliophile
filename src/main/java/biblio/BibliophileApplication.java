@@ -7,8 +7,11 @@ import org.springframework.hateoas.config.EnableEntityLinks;
 @SpringBootApplication
 @EnableEntityLinks
 public class BibliophileApplication {
-
 	public static void main(String[] args) {
-		SpringApplication.run(BibliophileApplication.class, args);
+	    try {
+            SpringApplication.run(BibliophileApplication.class, args);
+        } catch(Exception e) {
+	        System.err.println("Caught: " + e.getMessage());
+        }
 	}
 }

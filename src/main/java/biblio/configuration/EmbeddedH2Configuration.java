@@ -18,6 +18,15 @@ public class EmbeddedH2Configuration {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.H2).build();
 		return db;
+		// Perhaps in the future apply a MySQL or PostreSQL RDBMS:
+        /*
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/spring_jpa");
+        dataSource.setUsername( "myuser" );
+        dataSource.setPassword( "mySecretPassword" );
+        return dataSource;
+        */
 	}
 	
 }

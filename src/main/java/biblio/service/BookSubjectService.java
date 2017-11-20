@@ -70,12 +70,11 @@ public class BookSubjectService implements WebIdExists, FieldValueExists {
 	}
 
 	@Override
-	public boolean fieldValueExists(String fieldName, String value) {
+	public boolean fieldValueExists(String fieldName, String value)
+			throws UnsupportedOperationException {
 		if (fieldName.equals("name")) {
-			if (value == null) return false;
-			return bookSubjectRepository.existsByName(value);
-		} else {
-			throw new UnsupportedOperationException("Field \"" + fieldName + "\" not supported");
+			return value != null && bookSubjectRepository.existsByName(value);
 		}
+		throw new UnsupportedOperationException("Field \"" + fieldName + "\" not supported");
 	}
 }

@@ -23,8 +23,14 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <!-- Includes: Repositories, Entities, Hibernate, etc. -->
+            <!-- Hence there is no need to include the hibernate dependency. -->
+            <groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
@@ -85,22 +91,23 @@
 					<workingDirectory>src/main/frontend</workingDirectory>
 					<nodeDownloadRoot>https://nodejs.org/dist</nodeDownloadRoot>
 					<installDirectory>target</installDirectory>
-					<nodeVersion>v9.0.0</nodeVersion>
-					<npmVersion>5.5.1</npmVersion>
+                    <npmVersion>5.5.1</npmVersion>
+                    <nodeVersion>v9.0.0</nodeVersion>
+                    <yarnVersion>v1.3.2</yarnVersion>
 				</configuration>
 				<executions>
 					<execution>
 						<id>install node and npm</id>
 						<goals>
-							<goal>install-node-and-npm</goal>
+							<goal>install-node-and-yarn</goal>
 						</goals>
 						<phase>generate-resources</phase>
 					</execution>
 
 					<execution>
-						<id>npm install</id>
+						<id>yarn install</id>
 						<goals>
-							<goal>npm</goal>
+							<goal>yarn</goal>
 						</goals>
 						<configuration>
 							<arguments>install</arguments>
@@ -109,9 +116,9 @@
 					</execution>
 
 					<execution>
-						<id>npm run build</id>
+						<id>yarn run build</id>
 						<goals>
-							<goal>npm</goal>
+							<goal>yarn</goal>
 						</goals>
 						<configuration>
 							<arguments>run build</arguments>

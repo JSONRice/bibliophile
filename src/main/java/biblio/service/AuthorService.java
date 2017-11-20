@@ -73,13 +73,11 @@ public class AuthorService implements WebIdExists, FieldValueExists {
 	}
 
 	@Override
-	public boolean fieldValueExists(String fieldName, String value) {
-		if (fieldName.equals("name")) {
-			if (value == null) return false;
-			return authorRepository.existsByName(value);
-		} else {
-			throw new UnsupportedOperationException("Field \"" + fieldName + "\" not supported");
-		}
+	public boolean fieldValueExists(String fieldName, String value) throws UnsupportedOperationException {
+		if (fieldName.equals("name"))
+			return value != null && authorRepository.existsByName(value);
+		// else
+		throw new UnsupportedOperationException("Field \"" + fieldName + "\" not supported");
 	}
 
 	public void deleteAuthor(String webId) {
